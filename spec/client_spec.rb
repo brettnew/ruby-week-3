@@ -69,4 +69,15 @@ describe(Client) do
       expect(client.phone()).to(eq("555-0000"))
     end
   end
+
+  describe('#delete') do
+    it("lets you delete client from database") do
+      client1 = Client.new({:name => "Mary", :stylist_id => 1, :phone => '555-5555', :email => 'mary@gmail.com', :id => nil})
+      client1.save()
+      client2 = Client.new({:name => "Bob", :stylist_id => 1, :phone => '555-0000', :email => 'bob@gmail.com', :id => nil})
+      client2.save()
+      client1.delete()
+      expect(Client.all()).to(eq([client2]))
+    end
+  end
 end
