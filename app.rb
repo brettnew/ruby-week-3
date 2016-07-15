@@ -17,3 +17,12 @@ get('/stylists') do
   @stylists = Stylist.all()
   erb(:index)
 end
+
+post('/stylists') do
+  name = params.fetch('stylist_name')
+  stylist = Stylist.new({:name => name, :id => nil})
+  stylist.save()
+  @stylist = stylist
+  @stylists = Stylist.all()
+  erb(:index)
+end
