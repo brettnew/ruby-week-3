@@ -9,13 +9,17 @@ require('pry')
 DB = PG.connect({:dbname => 'hair_salon_test'})
 
 get('/') do
-  @stylists = Stylist.all()
   erb(:index)
+end
+
+get('/stylists/view') do
+ @stylists= Stylist.all()
+ erb(:stylist)
 end
 
 get('/stylists') do
   @stylists = Stylist.all()
-  erb(:index)
+  erb(:stylist)
 end
 
 post('/stylists') do
@@ -24,26 +28,23 @@ post('/stylists') do
   stylist.save()
   @stylist = stylist
   @stylists = Stylist.all()
-  erb(:index)
+  erb(:stylist)
+end
+
+get('/clients/view') do
+  @clients = Client.all()
+  erb(:client)
+end
+
+get('/clients') do
+  @clients = Client.all()
+  erb(:client)
 end
 
 get('/stylists/:id') do
   @stylist = Stylist.find(params.fetch('id').to_i())
   @clients = Client.all()
-  erb(:stylist)
-end
-
-post('/clients') do
-  name = params.fetch('client_name')
-  phone = params.fetch('phone_number')
-  email = params.fetch('email')
-  stylist_id = params.fetch('stylist_id').to_i()
-  @stylist = Stylist.find(stylist_id)
-  client = Client.new({:name => name, :stylist_id => stylist_id, :phone => phone, :email => email})
-  client.save()
-  @client = client
-  @clients = Client.all()
-  erb(:stylist)
+  erb(:stylist_client)
 end
 
 get('/clients/:id') do
@@ -51,4 +52,17 @@ get('/clients/:id') do
   @client.save()
   @clients = Client.all
   @stylist = Stylist.all()
+  erb(:client)
+end
+
+post('/clients/add_stylist') do
+  name = params.fetch('client_name')
+  phone = params.fetch('phone_number')
+  email = params.fetch('email')
+  stylist_id = params.fetch('stylist_id').to_i()
+  client = Client.new({:name => name, :stylist_id => stylist_id, :phone => phone, :email => email})
+  client.save()
+  @client = client
+  @clients = Client.all()
+  erb(:stylist_client)
 end
