@@ -39,9 +39,7 @@ Contact Brett New at brett.new91@gmail.com
 
 ## Links
 
-Git Hub Webpage: https://brettnew.github.io/ruby-project2
-
-Git Hub Repository: https://github.com/brettnew/ruby-project2
+Git Hub Repository: https://github.com/brettnew/ruby-week-3
 
 ### License
 
