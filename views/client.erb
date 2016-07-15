@@ -10,6 +10,22 @@
 <h3>There are no clients yet! Add a new client to their stylist!</h3>
 <% end %>
 
+<% if @clients.any?() %>
+<h4>Need to delete a client?</h4>
+<form action="/clients/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <label for="client_id">Delete a Stylist</label>
+  <select id="client_id" name="client_id" type = "text">
+    <% @clients.each() do |client| %>
+    <option value="<%= client.id() %>"><%= client.name() %></option>
+    <% end %>
+  </select></br>
+  <button type="submit">Delete</button>
+</form>
+<% else %>
+<h1></h1>
+<% end %>
+
 <h4><a href="/stylists/view">View All Stylists</a></h4>
 <h4><a href="/clients/view">View All Clients</a></h4>
 <h4><a href="/">Home</a></h4>
