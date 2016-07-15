@@ -5,7 +5,7 @@
 
 <ul>
   <% @clients.each do |client| %>
-  <li><a href="/clients/<%= client.id() %>"><%=client.name() %></a></li>
+  <li><%=client.name() %></li>
   <% end %>
 </ul>
 <% else %>
@@ -15,6 +15,7 @@
 <h3>Add New Clients</h3>
 
 <form action="/clients" method="post">
+  <input type="hidden" name="stylist_id" value="<%= @stylist.id() %>" id="stylist_id">
   <label for="client_name">Client name:</label>
   <input type="text" name="client_name" id="client_name"></br>
   <label for="phone_number">Client Phone Number:</label>

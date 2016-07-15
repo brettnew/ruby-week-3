@@ -32,3 +32,21 @@ get('/stylists/:id') do
   @clients = Client.all()
   erb(:stylist)
 end
+
+post('/clients') do
+  name = params.fetch('client_name')
+  phone = params.fetch('phone_number')
+  email = params.fetch('email')
+  stylist_id = params.fetch('stylist_id').to_i()
+  @stylist = Stylist.find(stylist_id)
+  client = Client.new({:name => name, :stylist_id => stylist_id, :phone => phone, :email => email})
+  client.save()
+  @client = client
+  @clients = Client.all()
+  erb(:stylist)
+end
+
+get('/clients/:id') do
+  @client = Client.find(params.fetch('id').to_i())
+  @stylist = Stylist.all()
+end
