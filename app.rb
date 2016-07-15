@@ -70,6 +70,13 @@ delete('/clients/delete') do
   erb(:client)
 end
 
+patch('/stylists/update/:id') do
+  name = params.fetch("name")
+  @stylist = Stylist.find(params.fetch("id").to_i())
+  @stylist.update({:name => name})
+  erb(:stylist_success)
+end
+
 patch('/clients/update/:id') do
   phone = params.fetch("phone")
   email = params.fetch("email")
