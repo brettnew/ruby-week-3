@@ -69,3 +69,11 @@ delete('/clients/delete') do
   @clients = Client.all()
   erb(:client)
 end
+
+patch('/clients/update/:id') do
+  phone = params.fetch("phone")
+  email = params.fetch("email")
+  @client = Client.find(params.fetch("id").to_i())
+  @client.update({:phone => phone, :email => email})
+  erb(:client_info)
+end
