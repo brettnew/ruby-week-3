@@ -50,4 +50,14 @@ describe(Client) do
       expect(Client.all()).to(eq([client]))
     end
   end
+
+  describe('.find') do
+    it('returns a client by its ID') do
+      client1 = Client.new({:name => "Mary", :stylist_id => 1, :phone => '555-5555', :email => 'mary@gmail.com', :id => nil})
+      client1.save()
+      client2 = Client.new({:name => "Bob", :stylist_id => 1, :phone => '555-0000', :email => 'bob@gmail.com', :id => nil})
+      client2.save()
+      expect(Client.find(client2.id())).to(eq(client2))
+    end
+  end
 end
