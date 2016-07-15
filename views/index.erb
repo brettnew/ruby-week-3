@@ -1,0 +1,21 @@
+<h1>Welcome to the Salon Owner App</h1>
+
+<h3>Add New Stylist</h3>
+
+<form action="/stylists" method="post">
+  <label for="stylist_name">Stylist name:</label>
+  <input type="text" name="stylist_name" id="stylist_name"></br>
+  <button type="submit">Add Stylist</button>
+</form>
+
+<% if @stylists.any?() %>
+<p>Click on a stylist to see their clients or to add new clients:</p>
+
+<ul>
+  <% @stylists.each do |stylist| %>
+  <li><a href="/stylists/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no books yet!</p>
+<% end %>
