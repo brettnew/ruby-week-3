@@ -60,4 +60,13 @@ describe(Client) do
       expect(Client.find(client2.id())).to(eq(client2))
     end
   end
+
+  describe('#update') do
+    it("lets you update clients in the database") do
+      client = Client.new({:name => "Mary", :stylist_id => 1, :phone => '555-5555', :email => 'mary@gmail.com', :id => nil})
+      client.save()
+      client.update({:phone => "555-0000", :email => 'mary@email.com'})
+      expect(client.phone()).to(eq("555-0000"))
+    end
+  end
 end
