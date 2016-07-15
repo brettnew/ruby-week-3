@@ -55,3 +55,10 @@ get('/clients/:id') do
   @stylists = Stylist.all()
   erb(:client_info)
 end
+
+delete('/stylists/delete') do
+  @stylist = Stylist.find(params.fetch('stylist_id').to_i())
+  @stylist.delete()
+  @stylists = Stylist.all()
+  erb(:stylist)
+end

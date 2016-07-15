@@ -18,6 +18,22 @@
   <button type="submit">Add Stylist</button>
 </form>
 
+<% if @stylists.any?() %>
+<h4>Need to delete a stylist?</h4>
+<form action="/stylists/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <label for="stylist_id">Delete a Stylist</label>
+  <select id="stylist_id" name="stylist_id" type = "text">
+    <% @stylists.each() do |stylist| %>
+    <option value="<%= stylist.id() %>"><%= stylist.name() %></option>
+    <% end %>
+  </select></br>
+  <button type="submit">Delete</button>
+</form>
+<% else %>
+<h1></h1>
+<% end %>
+
 <h4><a href="/stylists/view">View All Stylists</a></h4>
 <h4><a href="/clients/view">View All Clients</a></h4>
 <h4><a href="/">Home</a></h4>
