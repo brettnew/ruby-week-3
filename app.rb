@@ -48,5 +48,7 @@ end
 
 get('/clients/:id') do
   @client = Client.find(params.fetch('id').to_i())
+  @client.save()
+  @clients = Client.all
   @stylist = Stylist.all()
 end
