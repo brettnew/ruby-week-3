@@ -17,11 +17,6 @@ get('/stylists/view') do
  erb(:stylist)
 end
 
-get('/stylists') do
-  @stylists = Stylist.all()
-  erb(:stylist)
-end
-
 post('/stylists') do
   name = params.fetch('stylist_name')
   stylist = Stylist.new({:name => name, :id => nil})
@@ -31,28 +26,10 @@ post('/stylists') do
   erb(:stylist)
 end
 
-get('/clients/view') do
-  @clients = Client.all()
-  erb(:client)
-end
-
-get('/clients') do
-  @clients = Client.all()
-  erb(:client)
-end
-
 get('/stylists/:id') do
   @stylist = Stylist.find(params.fetch('id').to_i())
   @clients = Client.all()
   erb(:stylist_client)
-end
-
-get('/clients/:id') do
-  @client = Client.find(params.fetch('id').to_i())
-  @client.save()
-  @clients = Client.all
-  @stylist = Stylist.all()
-  erb(:client)
 end
 
 post('/clients/add_stylist') do
@@ -60,9 +37,28 @@ post('/clients/add_stylist') do
   phone = params.fetch('phone_number')
   email = params.fetch('email')
   stylist_id = params.fetch('stylist_id').to_i()
-  client = Client.new({:name => name, :stylist_id => stylist_id, :phone => phone, :email => email})
+  client = Client.new({:name => name, :stylist_id => stylist_id, :phone => phone, :email => email, :id => nil})
   client.save()
   @client = client
   @clients = Client.all()
-  erb(:stylist_client)
+  erb(:client)
 end
+
+get('/clients/view') do
+  @clients = Client.all()
+  erb(:client)
+end
+
+get('/clients/:id') do
+  @client = Client.find(params.fetch('id').to_i())
+  @clients = Client.all
+  @stylists = Stylist.all()
+  erb(:client)
+end
+#
+# get('/clients') do
+#   @clients = Client.all()
+#   erb(:client)
+# end
+#
+#
