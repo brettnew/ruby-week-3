@@ -47,4 +47,24 @@ describe(Stylist) do
       expect(Stylist.find(stylist2.id())).to(eq(stylist2))
     end
   end
+
+  describe('#update') do
+    it("lets you update stylists in the database") do
+      stylist = Stylist.new({:name => "Mary", :id => nil})
+      stylist.save()
+      stylist.update({:name => "Carrie", :email => 'mary@email.com'})
+      expect(stylist.name()).to(eq("Carrie"))
+    end
+  end
+
+  describe('#delete') do
+    it("lets you delete stylist from database") do
+      stylist1 = Stylist.new({:name => "Mary", :id => nil})
+      stylist1.save()
+      stylist2 = Stylist.new({:name => "Bob", :id => nil})
+      stylist2.save()
+      stylist1.delete()
+      expect(Stylist.all()).to(eq([stylist2]))
+    end
+  end
 end
