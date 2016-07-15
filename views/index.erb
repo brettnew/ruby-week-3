@@ -1,15 +1,7 @@
 <h1>Welcome to the Salon Owner App</h1>
 
-<h3>Add New Stylist</h3>
-
-<form action="/stylists" method="post">
-  <label for="stylist_name">Stylist name:</label>
-  <input type="text" name="stylist_name" id="stylist_name"></br>
-  <button type="submit">Add Stylist</button>
-</form>
-
 <% if @stylists.any?() %>
-<p>Click on a stylist to see their clients or to add new clients:</p>
+<h4>Click on a stylist to see their clients or to add new clients:</h4>
 
 <ul>
   <% @stylists.each do |stylist| %>
@@ -17,5 +9,13 @@
   <% end %>
 </ul>
 <% else %>
-<p>There are no stylists yet!</p>
+<p>There are no stylists yet! Add a new stylist below!</p>
 <% end %>
+
+<h3>Add New Stylist</h3>
+
+<form action="/stylists" method="post">
+  <label for="stylist_name">Stylist name:</label>
+  <input type="text" name="stylist_name" id="stylist_name"></br>
+  <button type="submit">Add Stylist</button>
+</form>
