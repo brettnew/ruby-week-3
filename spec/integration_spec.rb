@@ -107,3 +107,36 @@ describe('the delete clients path', {:type => :feature}) do
     expect(page).to have_content ('There are no clients')
   end
 end
+
+describe('the view clients path', {:type => :feature}) do
+  it('allows the user to update client information') do
+  visit('/stylists/view')
+  fill_in('stylist_name', :with => 'Sarah')
+  click_button('Add Stylist')
+  click_link('Sarah')
+  fill_in('client_name', :with => 'Bob')
+  fill_in('phone_number', :with => '555-5555')
+  fill_in('email', :with => 'bob@email.com')
+  click_button('Add Client')
+  click_link('Bob')
+  expect(page).to have_content('Bob')
+  end
+end
+
+describe('the update clients path', {:type => :feature}) do
+  it('allows the user to update client information') do
+  visit('/stylists/view')
+  fill_in('stylist_name', :with => 'Sarah')
+  click_button('Add Stylist')
+  click_link('Sarah')
+  fill_in('client_name', :with => 'Bob')
+  fill_in('phone_number', :with => '555-5555')
+  fill_in('email', :with => 'bob@email.com')
+  click_button('Add Client')
+  click_link('Bob')
+  fill_in('phone', :with => '555-0000')
+  fill_in('email', :with => 'bob@hotmail.com')
+  click_button('Update Information')
+  expect(page).to have_content('555-0000')
+  end
+end
