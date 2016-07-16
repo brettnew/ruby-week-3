@@ -54,7 +54,7 @@ describe('the delete stylist path', {:type => :feature}) do
   end
 end
 
-describe('the add a client path', {:type => :feature}) do
+describe('the add a client to stylist path', {:type => :feature}) do
   it('allows the user to assign a client to an existing stylist') do
   visit('/stylists/view')
   fill_in('stylist_name', :with => 'Sarah')
@@ -65,5 +65,45 @@ describe('the add a client path', {:type => :feature}) do
   fill_in('email', :with => 'bob@email.com')
   click_button('Add Client')
   expect(page).to have_content('Bob')
+  end
+end
+
+describe('the view clients path', {:type => :feature}) do
+  it('allows the user to visit home page and view clients') do
+    visit('/')
+    click_link('View All Clients')
+    expect(page).to have_content('There are no clients yet')
+  end
+end
+
+describe('the add clients path', {:type => :feature}) do
+  it('allows the user to enter client and view that client') do
+    visit('/clients/view')
+    visit('/stylists/view')
+    fill_in('stylist_name', :with => 'Sarah')
+    click_button('Add Stylist')
+    click_link('Sarah')
+    fill_in('client_name', :with => 'Bob')
+    fill_in('phone_number', :with => '555-5555')
+    fill_in('email', :with => 'bob@email.com')
+    click_button('Add Client')
+    expect(page).to have_content('Bob')
+  end
+end
+
+describe('the delete clients path', {:type => :feature}) do
+  it('allows the user to delete client') do
+    visit('/clients/view')
+    visit('/stylists/view')
+    fill_in('stylist_name', :with => 'Sarah')
+    click_button('Add Stylist')
+    click_link('Sarah')
+    fill_in('client_name', :with => 'Bob')
+    fill_in('phone_number', :with => '555-5555')
+    fill_in('email', :with => 'bob@email.com')
+    click_button('Add Client')
+    select('Bob', :from => 'client_id')
+    click_button('Delete')
+    expect(page).to have_content ('There are no clients')
   end
 end
