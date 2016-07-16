@@ -29,5 +29,27 @@ describe('the view stylists path', {:type => :feature}) do
     click_link('Sarah')
     expect(page).to have_content ('Update Sarah')
   end
+end
 
+describe('the update a stylist path', {:type => :feature}) do
+  it('allows the user to update an existing stylist') do
+    visit('/stylists/view')
+    fill_in('stylist_name', :with => 'Sarah')
+    click_button('Add Stylist')
+    click_link('Sarah')
+    fill_in('name', :with => 'Mary')
+    click_button('Update Name')
+    expect(page).to have_content('Success!')
+  end
+end
+
+describe('the delete stylist path', {:type => :feature}) do
+  it('allows the user to delete existing stylist') do
+    visit('/stylists/view')
+    fill_in('stylist_name', :with => 'Sarah')
+    click_button('Add Stylist')
+    select('Sarah', :from => 'stylist_id')
+    click_button('Delete')
+    expect(page).to have_content('There are no stylists')
+  end
 end
